@@ -28,6 +28,7 @@ public class WordChallenge1 {
     private static Set<String> dictionary;
 
     protected static Set<String> getDictionary() {
+        //if (dictionary != null) return dictionary;
         //From https://gist.github.com/wchargin/8927565
         //since /usr/share/dict/words didn't have a comprehensive list
         InputStream resourceAsStream =

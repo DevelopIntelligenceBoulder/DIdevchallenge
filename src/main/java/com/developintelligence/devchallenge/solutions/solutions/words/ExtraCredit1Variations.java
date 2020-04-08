@@ -70,7 +70,6 @@ public class ExtraCredit1Variations {
                 orig.charAt(orig.length() - 1) != dictWord.charAt(dictWord.length() - 1));
         Map<String, Set<String>> mli =
                 mapOfWordAndListOfMatchesWithPredFuncAndLargeInput(iwa1, subStringCreator, postMatchPred);
-
         mli.forEach((k, v) -> System.out.println(k + ": " + v));
     }
 
@@ -90,7 +89,7 @@ public class ExtraCredit1Variations {
      * Here we pass in 3  arguments:
      * isWordApplicable: Predicate - is used to filter out unacceptable words.
      * e.g. we only want to work with input words of length > 7 that start with 'x'.
-     * e.g.  pred = (s) -> s.length() > 7 and s.startsWith('x')
+     * e.g.  pred = (s) -> s.length() > 7 and s.startsWith('X')
      *
      * subStringCreator: Function - is applied when we need to get the part of the input and dictionary
      * words that we are going to use for matching.  e.g. give me a substring of index 3 through 8
@@ -191,7 +190,8 @@ public class ExtraCredit1Variations {
                     } else {
                         return Stream.of(new Tuple2<>(word, "Not Found"));
                     }
-                }).filter(pair -> !pair.getB().equals("Not Found"))
+                }).filter(pair -> !pair.getB().equals("Not Found") &&
+                        !pair.getA().equalsIgnoreCase(pair.getB()))
                 .collect(Collectors.groupingBy((Tuple2<String, String> pair) -> pair.getB(),
                         TreeMap::new,
                         Collectors.mapping(p -> p.getA(), Collectors.toSet())));
@@ -248,7 +248,8 @@ public class ExtraCredit1Variations {
                     } else {
                         return Stream.of(new Tuple2<>(word, "Not Found"));
                     }
-                }).filter(pair -> !pair.getB().equals("Not Found") )
+                }).filter(pair -> !pair.getB().equals("Not Found") &&
+                        !pair.getA().equalsIgnoreCase(pair.getB()))
                 .collect(Collectors.groupingBy((Tuple2<String, String> pair) -> pair.getB(),
                         TreeMap::new,
                         Collectors.mapping(p -> p.getA(), Collectors.toList())));
